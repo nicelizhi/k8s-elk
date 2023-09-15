@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: logstash
+spec:
+  ports:
+    - name: logstash
+      protocol: TCP
+      port: 10000
+      targetPort: 9600
+    - name: filebeat
+      protocol: TCP
+      port: 5044
+      targetPort: 5044
+  selector:
+    app: logstash
+  type: LoadBalancer
+  sessionAffinity: None

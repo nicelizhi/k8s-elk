@@ -1,0 +1,19 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: logstash-pipelines
+data:
+  logstash.conf: |
+    input {
+      syslog {
+        type => "rsyslog"
+        port => 5044
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        "user" => "elastic"
+        "password" => "abc123456"
+      }
+    }

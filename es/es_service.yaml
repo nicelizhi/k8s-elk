@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+spec:
+  ports:
+    - name: elasticsearch
+      protocol: TCP
+      port: 9200
+      targetPort: 9200
+  selector:
+    app: elasticsearch
+  type: ClusterIP
+  sessionAffinity: None

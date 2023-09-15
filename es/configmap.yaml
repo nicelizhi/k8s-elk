@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: elasticsearch-config
+data:
+  elasticsearch.yml: |
+    network.host: 0.0.0.0
+    xpack.monitoring.collection.enabled: true
+    http.cors.enabled: true
+    http.cors.allow-origin: "*"
+    xpack.security.enabled: true

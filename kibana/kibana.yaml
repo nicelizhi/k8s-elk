@@ -1,0 +1,53 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: kibana
+  template:
+    metadata:
+      labels:
+        component: kibana
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: kibana-config
+            defaultMode: 420
+        - name: secrets
+          secret:
+            secretName: es-user-pass
+            defaultMode: 0400
+      containers:
+        - name: elk-kibana
+          image: 'docker.elastic.co/kibana/kibana:7.16.0'
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1
+          ports:
+            - name: kibana
+              containerPort: 5601
+              protocol: TCP
+          env:
+            - name: KIBANA_SYSTEM_PASSWORD
+              valueFrom: 
+                secretKeyRef: 
+                  name: es-user-pass
+                  key: password
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom: 
+                secretKeyRef: 
+                  name: es-user-pass
+                  key: password
+          volumeMounts:
+            - name: config
+              mountPath: /usr/share/kibana/config/kibana.yml
+              subPath: kibana.yml
+              
