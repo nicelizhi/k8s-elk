@@ -9,6 +9,10 @@ data:
 
     xpack.monitoring.enabled: true
 
+    config.reload.automatic: true
+
+    config.reload.interval: 300s
+
     xpack.monitoring.elasticsearch.hosts: ["elasticsearch:9200" ]
 
     xpack.monitoring.elasticsearch.username: "elastic"
