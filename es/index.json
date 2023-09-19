@@ -1,0 +1,578 @@
+PUT /logstash
+{
+    "mappings" : {
+      "dynamic_templates" : [
+        {
+          "message_field" : {
+            "path_match" : "message",
+            "match_mapping_type" : "string",
+            "mapping" : {
+              "norms" : false,
+              "type" : "text"
+            }
+          }
+        },
+        {
+          "string_fields" : {
+            "match" : "*",
+            "match_mapping_type" : "string",
+            "mapping" : {
+              "fields" : {
+                "keyword" : {
+                  "ignore_above" : 256,
+                  "type" : "keyword"
+                }
+              },
+              "norms" : false,
+              "type" : "text"
+            }
+          }
+        }
+      ],
+      "properties" : {
+        "@timestamp" : {
+          "type" : "date"
+        },
+        "@version" : {
+          "type" : "keyword"
+        },
+        "addon" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "application_name" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "connection_source" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "database" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "facility" : {
+          "type" : "long"
+        },
+        "facility_label" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "geoip" : {
+          "dynamic" : "true",
+          "properties" : {
+            "ip" : {
+              "type" : "ip"
+            },
+            "latitude" : {
+              "type" : "half_float"
+            },
+            "location" : {
+              "type" : "geo_point"
+            },
+            "longitude" : {
+              "type" : "half_float"
+            }
+          }
+        },
+        "heroku_drain_id" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "heroku_dyno" : {
+          "type" : "keyword"
+        },
+        "heroku_source" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "host" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "hostname" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "log_line" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "logsource" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "message" : {
+          "type" : "text",
+          "norms" : false
+        },
+        "pid" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "priority" : {
+          "type" : "long"
+        },
+        "proc_start_time" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "process_id" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "program" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#active-connections" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#current_transaction" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#db_size" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#evicted-keys" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#hit-rate" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#index-cache-hit-rate" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#load-avg-15m" : {
+          "type" : "float_range"
+        },
+        "sample#load-avg-1m" : {
+          "type" : "float_range"
+        },
+        "sample#load-avg-5m" : {
+          "type" : "float_range",
+        },
+        "sample#memory-cached" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#memory-free" : {
+          "type" : "float_range"
+        },
+        "sample#memory-postgres" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#memory-redis" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#memory-total" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#read-iops" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#table-cache-hit-rate" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#tables" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#tmp-disk-available" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#tmp-disk-used" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#waiting-connections" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#wal-percentage-used" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sample#write-iops" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "session_id" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "severity" : {
+          "type" : "long"
+        },
+        "severity_label" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "source" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "sql_error_code" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog5424_pri" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog5424_ver" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog_facility" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog_facility_code" : {
+          "type" : "long"
+        },
+        "syslog_message" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog_severity" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "syslog_severity_code" : {
+          "type" : "long"
+        },
+        "tags" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "tid" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "time_ms" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "timestamp" : {
+          "type" : "date"
+        },
+        "timestamp8601" : {
+          "type" : "date"
+        },
+        "type" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "user" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        },
+        "version" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "norms" : false
+        }
+      }
+    }
+  }
