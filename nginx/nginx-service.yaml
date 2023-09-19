@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  ports:
+    - name: elasticsearch
+      protocol: TCP
+      port: 10002
+      targetPort: 80
+  selector:
+    app: nginx
+  type: LoadBalancer
+  sessionAffinity: None
