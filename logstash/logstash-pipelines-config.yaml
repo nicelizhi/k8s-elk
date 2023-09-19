@@ -16,6 +16,13 @@ data:
         }
         mutate { rename => ["heroku_message", "message"] }
         kv { source => "message" }
+        mutate { convert => ["sample#memory-free", "integer"]}
+        mutate { convert => ["sample#memory-total", "integer"]}
+        mutate { convert => ["sample#memory-redis", "integer"]}
+        mutate { convert => ["sample#memory-cached", "integer"]}
+        mutate { convert => ["sample#load-avg-5m", "float"]}
+        mutate { convert => ["sample#load-avg-1m", "float"]}
+        mutate { convert => ["sample#load-avg-15m", "float"]}
         syslog_pri { syslog_pri_field_name => "syslog5424_pri" }
     }
     output {
@@ -23,5 +30,7 @@ data:
         hosts => ["http://elasticsearch:9200"]
         "user" => "elastic"
         "password" => "abc123456"
+        "index" => "logstash-%{heroku_dyno}"
+         template_overwrite => true
       }
     }
