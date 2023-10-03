@@ -9,3 +9,4 @@ data:
     http.cors.enabled: true
     http.cors.allow-origin: "*"
     xpack.security.enabled: true
+    xpack.security.authc.api_key.enabled: true
